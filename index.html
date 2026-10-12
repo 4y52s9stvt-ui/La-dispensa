@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#17283a">
+<meta name="description" content="La tua dispensa, i tuoi pasti, meno sprechi.">
+<link rel="manifest" href="manifest.json">
+<link rel="icon" href="icon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="icon.svg">
+<title>La Mia Dispensa</title>
+<style>
+:root{--navy:#17283a;--green:#16836b;--mint:#e7f5ef;--blue:#eaf2ff;--amber:#a96712;--bg:#f5f7f8;--ink:#17283a;--muted:#657487;--line:#dce3e8;--white:#fff;--red:#b83a3a}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.45 system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
+header{background:var(--navy);color:white;padding:18px max(16px,calc((100vw - 1100px)/2));position:sticky;top:0;z-index:5;box-shadow:0 2px 12px #10203022}
+.brand{display:flex;align-items:center;gap:12px}.logo{width:44px;height:44px;border-radius:13px;background:#245a50;display:grid;place-items:center;font-size:25px}.brand h1{font-size:1.2rem;margin:0}.brand p{font-size:.82rem;margin:2px 0 0;color:#c8d7e3}
+nav{display:flex;gap:8px;overflow:auto;margin-top:16px;padding-bottom:2px}nav button{white-space:nowrap;border:0;border-radius:10px;background:#25384a;color:#dce6ef;padding:10px 13px;font-weight:650}nav button.active{background:#2f7568;color:white}
+main{max-width:1100px;margin:0 auto;padding:20px 16px 48px}.page{display:none}.page.active{display:block}.intro{margin-bottom:18px}.intro h2{font-size:1.55rem;margin:0 0 5px}.muted{color:var(--muted);font-size:.92rem}
+.stats{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;margin:18px 0}.stat,.card{background:white;border:1px solid var(--line);border-radius:16px;padding:16px;box-shadow:0 3px 12px #1a2b3a06}.stat .n{font-size:1.8rem;font-weight:800;margin:5px 0}.stat small{color:var(--muted)}.section-title{display:flex;align-items:center;justify-content:space-between;gap:10px;margin:22px 0 12px}.section-title h3{margin:0;font-size:1.1rem}
+.grid2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}.meal{border:1px solid var(--line);border-radius:15px;padding:15px;background:white}.meal h4{margin:0 0 4px}.meal .time{font-size:.82rem;color:var(--green);font-weight:750}.meal p{margin:8px 0;color:var(--muted);font-size:.9rem}.tags{display:flex;flex-wrap:wrap;gap:6px;margin:10px 0}.tag{background:#eef2f5;border-radius:999px;padding:4px 8px;font-size:.78rem}
+button,.btn{font:inherit;cursor:pointer}.primary{border:0;background:var(--green);color:white;border-radius:10px;padding:11px 14px;font-weight:700}.secondary{border:1px solid var(--line);background:white;color:var(--ink);border-radius:10px;padding:10px 13px;font-weight:650}.danger{border:1px solid #efcaca;background:#fff5f5;color:var(--red);border-radius:9px;padding:7px 10px}.row{display:flex;align-items:center;gap:10px}.between{justify-content:space-between}.formgrid{display:grid;grid-template-columns:2fr 1fr 1fr;gap:12px}.field{display:flex;flex-direction:column;gap:5px}.field label{font-size:.85rem;font-weight:700}.field input,.field select,.search{border:1px solid #cdd7df;border-radius:10px;background:white;padding:11px;font:inherit;min-width:0;width:100%}.form-actions{display:flex;gap:10px;margin-top:13px;flex-wrap:wrap}.foodlist{display:grid;gap:8px;margin-top:12px}.food{display:flex;gap:12px;align-items:center;justify-content:space-between;background:white;border:1px solid var(--line);border-radius:12px;padding:12px}.foodname{font-weight:750}.foodmeta{font-size:.82rem;color:var(--muted)}.exp{color:var(--red);font-weight:750}.soon{color:var(--amber);font-weight:750}.empty{padding:22px;text-align:center;color:var(--muted);border:1px dashed #c8d3dc;border-radius:12px}.checkrow{display:flex;align-items:center;gap:10px;padding:12px;border-bottom:1px solid var(--line)}.checkrow:last-child{border-bottom:0}.checkrow input{width:20px;height:20px}.pill{font-size:.78rem;border-radius:999px;padding:4px 8px;background:var(--mint);color:#17634f;font-weight:700}.notice{padding:12px 14px;border-radius:10px;background:#e7f5ef;color:#17634f;margin-bottom:14px}.notice.error{background:#fff0f0;color:#9f2929}.small{font-size:.82rem}.footer{margin-top:28px;text-align:center;color:var(--muted);font-size:.8rem}.hide{display:none!important}
+@media(max-width:760px){.stats{grid-template-columns:repeat(2,minmax(0,1fr))}.grid2{grid-template-columns:1fr}.formgrid{grid-template-columns:1fr 1fr}.formgrid .wide{grid-column:1/-1}header{padding:14px 14px 10px}main{padding:16px 12px 36px}.stat{padding:13px}.stat .n{font-size:1.5rem}}
+@media(min-width:761px){nav{margin-top:14px}.foodlist{grid-template-columns:repeat(2,minmax(0,1fr))}}
+</style>
+</head>
+<body>
+<header>
+  <div class="brand"><div class="logo">🥗</div><div><h1>La Mia Dispensa</h1><p>La tua cucina, organizzata con intelligenza</p></div></div>
+  <nav aria-label="Navigazione principale">
+    <button class="active" data-page="home">⌂ Panoramica</button><button data-page="dispensa">▤ Dispensa</button><button data-page="menu">▦ Menu</button><button data-page="spesa">🛒 Lista della spesa</button><button data-page="backup">⚙ Dati e backup</button>
+  </nav>
+</header>
+<main>
+<div id="notice" class="notice hide" role="status"></div>
+<section class="page active" id="page-home">
+ <div class="intro"><h2>Buona cucina, meno sprechi</h2><div class="muted">Controlla le scorte e pianifica i pasti di oggi e domani.</div></div>
+ <div class="stats">
+  <div class="stat"><div>🥫</div><div class="n" id="stat-foods">0</div><small>Alimenti attivi</small></div>
+  <div class="stat"><div>⏳</div><div class="n" id="stat-expiring">0</div><small>In scadenza entro 3 giorni</small></div>
+  <div class="stat"><div>🍽️</div><div class="n" id="stat-recipes">0</div><small>Ricette compatibili</small></div>
+  <div class="stat"><div>🛒</div><div class="n" id="stat-shopping">0</div><small>Articoli in lista</small></div>
+ </div>
+ <div class="section-title"><h3>Menu dei prossimi due giorni</h3><button class="secondary" data-goto="menu">Apri menu</button></div>
+ <div id="home-meals" class="grid2"></div>
+ <div class="section-title"><h3>Da controllare per primi</h3><button class="secondary" data-goto="dispensa">Gestisci scorte</button></div>
+ <div id="home-expiring" class="foodlist"></div>
+ <div class="footer">I tuoi dati restano in questo browser. Usa “Dati e backup” per trasferirli su altri dispositivi.</div>
+</section>
+<section class="page" id="page-dispensa">
+ <div class="intro"><h2>La tua dispensa</h2><div class="muted">Inserisci alimenti, quantità, scadenza e posizione.</div></div>
+ <div class="card">
+  <h3 style="margin-top:0">Aggiungi un alimento</h3>
+  <form id="food-form">
+   <div class="formgrid">
+    <div class="field wide"><label for="food-name">Nome alimento *</label><input id="food-name" required placeholder="Es. pasta, mele, latte"></div>
+    <div class="field"><label for="food-qty">Quantità *</label><input id="food-qty" required type="number" min="0.01" step="any" value="1"></div>
+    <div class="field"><label for="food-unit">Unità</label><select id="food-unit"><option>pz</option><option>g</option><option>kg</option><option>ml</option><option>l</option><option>confezioni</option></select></div>
+    <div class="field"><label for="food-expiry">Data di scadenza</label><input id="food-expiry" type="date"></div>
+    <div class="field"><label for="food-place">Posizione</label><select id="food-place"><option>Frigorifero</option><option>Freezer</option><option>Dispensa</option></select></div>
+   </div>
+   <div class="form-actions"><button class="primary" type="submit">＋ Aggiungi alimento</button></div>
+  </form>
+ </div>
+ <div class="section-title"><h3>Alimenti registrati</h3><span id="food-count" class="pill">0 voci</span></div>
+ <input class="search" id="food-search" placeholder="Cerca nella dispensa…" aria-label="Cerca nella dispensa">
+ <div id="food-list" class="foodlist"></div>
+</section>
+<section class="page" id="page-menu">
+ <div class="intro"><h2>Menu giornaliero</h2><div class="muted">Vengono mostrate solo ricette i cui ingredienti elencati sono presenti nelle scorte attive.</div></div>
+ <div class="row" style="margin:15px 0"><button class="secondary active-day" data-day="0">Oggi</button><button class="secondary" data-day="1">Domani</button></div>
+ <div id="menu-content"></div>
+ <p class="muted small">Nota: le ricette sono idee di base. La versione iniziale verifica i nomi degli ingredienti, non la quantità sufficiente né condimenti opzionali, allergie o completezza nutrizionale. I tempi sono stime.</p>
+</section>
+<section class="page" id="page-spesa">
+ <div class="intro"><h2>Lista della spesa</h2><div class="muted">Aggiungi prodotti e spuntali quando li hai acquistati.</div></div>
+ <form id="shopping-form" class="row"><input id="shopping-name" class="search" placeholder="Es. pane, olio, banane" required><button class="primary">Aggiungi</button></form>
+ <div id="shopping-list" class="card" style="padding:0;margin-top:14px"></div>
+</section>
+<section class="page" id="page-backup">
+ <div class="intro"><h2>Dati e backup</h2><div class="muted">Per usare la stessa dispensa su più dispositivi, trasferisci un backup oppure aggiungi in futuro un servizio cloud.</div></div>
+ <div class="card"><h3>Esporta i tuoi dati</h3><p class="muted">Scarica un file JSON con alimenti e lista della spesa. Puoi conservarlo o importarlo su un altro dispositivo.</p><button id="export-btn" class="primary">Scarica backup</button></div>
+ <div class="card" style="margin-top:14px"><h3>Importa un backup</h3><p class="muted">L'importazione sostituisce i dati presenti su questo dispositivo.</p><input id="import-file" type="file" accept="application/json,.json"><div class="form-actions"><button id="import-btn" class="secondary">Importa file selezionato</button></div></div>
+ <div class="card" style="margin-top:14px"><h3>Rimuovi tutti i dati</h3><p class="muted">Questa operazione non si può annullare. Esporta prima un backup se vuoi conservare le scorte.</p><button id="clear-btn" class="danger">Cancella dati locali</button></div>
+ <div class="card" style="margin-top:14px"><h3>Come funziona il salvataggio</h3><p>I dati vengono salvati automaticamente nel browser di questo dispositivo. Per condividerli tra iPhone, iPad e computer in tempo reale serve una sincronizzazione cloud da configurare separatamente; il backup consente invece di trasferire i dati manualmente.</p></div>
+</section>
+</main>
+<script src="app.js"></script>
+</body>
+</html>
